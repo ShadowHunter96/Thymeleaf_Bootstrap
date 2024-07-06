@@ -31,7 +31,14 @@ public class SecurityConfiguration {
                         .loginPage("/login")
                         .defaultSuccessUrl("/", true) // Redirect to index.html after successful login
                         .permitAll()
-                );
+                ).logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/logout-success")
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .deleteCookies("JSESSIONID")
+                        .permitAll()
+                ).httpBasic(Customizer.withDefaults());
         return httpSecurity.build();
     }
 

@@ -63,5 +63,10 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUserName(adminDto.getUserName());
     }
 
+    public User findByUserName(String userName){
+        User foundUser = userRepository.findByUserName(userName);
+        return foundUser;
+    }
+
 
 }

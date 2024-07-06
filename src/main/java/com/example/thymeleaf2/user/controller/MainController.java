@@ -1,7 +1,13 @@
 package com.example.thymeleaf2.user.controller;
 
 import com.example.thymeleaf2.user.dto.UserDto;
+import com.example.thymeleaf2.user.entity.User;
 import com.example.thymeleaf2.user.service.UserService;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,5 +48,35 @@ public class MainController {
         model.addAttribute("user", new UserDto());
         return "registration";
     }
+
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.logout();
+        } catch (ServletException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/login?logout";
+    }
+
+    @GetMapping("/logout")
+    public String logoutSuccess() {
+        return "logout"; // This will return the logout.html template
+    }
+
+    @GetMapping("/")
+    public String home(Model model) {
+        // Get the authenticated user's details
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            String username = ((UserDetails) principal).getUsername();
+            User user = userService.findByUserName(username);
+            model.addAttribute("firstName", user.getFirstName());
+            model.addAttribute("lastName", user.getLastName());
+        }
+        return "index";
+    }
+
+
 
 }

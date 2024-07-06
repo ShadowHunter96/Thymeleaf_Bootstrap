@@ -4,14 +4,11 @@
     <meta charset="UTF-8">
     <title>Login App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" rel="stylesheet"/>
     <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}" defer></script>
     <script th:src="@{/webjars/htmx.org/1.9.2/dist/htmx.min.js}" defer></script>
 </head>
 <body>
-<br>
-<br>
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -31,25 +28,17 @@
                     <input type="text" class="form-control" id="username" name="username"
                            placeholder="Enter username" autofocus="autofocus">
                 </div>
-                <br>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <div class="input-group">
-                        <input type="password" class="form-control" id="password" name="password"
-                               placeholder="Enter password">
-                        <div class="input-group-append">
-
-                        </div>
-                    </div>
+                    <input type="password" class="form-control" id="password" name="password"
+                           placeholder="Enter password">
                 </div>
-                <br>
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" value="Log in">
                 </div>
             </form>
             <div class="form-group">
-                <span>New user ? <a href="/" th:href="@{/registration}">Register Here</a> </span>
-
+                <span>New user? <a th:href="@{/registration}">Register Here</a></span>
             </div>
         </div>
     </div>
